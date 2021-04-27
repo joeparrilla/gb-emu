@@ -2,4 +2,10 @@
 
 GB::GB()
 {
+
+}
+
+void GB::LoadCart(char * file_name)
+{
+        
 }

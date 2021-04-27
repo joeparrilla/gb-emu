@@ -2,11 +2,13 @@
 
 #include <stdint.h>
 #include <array>
+#include "cart.h"
 
 class GB
 {
 public:
         GB();
+        void LoadCart(char * file_name);
 
         enum mem_bus_pointers
         {
@@ -25,6 +27,13 @@ public:
         };
 
 private:
+        //ram, registers, etc on chip
         std::array<uint8_t, 8192> vram{};
         std::array<uint8_t, 8192> wram{};
+        std::array<uint8_t, 16> io_regs{};
+        std::array<uint16_t, 6> cpu_regs{}; 
+        std::array<uint8_t, 20> oam{};
+        std::array<uint8_t, 16> hram{};
+        uint8_t ie{0};
+        Cart cart;
 };
