@@ -8,7 +8,7 @@ class GB
 {
 public:
         GB();
-        void LoadCart(char * file_name);
+        void LoadCart(std::string file_name);
 
         enum mem_bus_pointers
         {
@@ -26,6 +26,8 @@ public:
                 INT_REGISTER = 0xFFFF
         };
 
+        Cart cart;
+
 private:
         //ram, registers, etc on chip
         std::array<uint8_t, 8192> vram{};
@@ -35,5 +37,4 @@ private:
         std::array<uint8_t, 20> oam{};
         std::array<uint8_t, 16> hram{};
         uint8_t ie{0};
-        Cart cart;
 };

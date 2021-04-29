@@ -10,6 +10,7 @@
 *.o
 *.obj
 build/
+roms/
 
 # Precompiled Headers
 *.gch

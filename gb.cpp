@@ -2,10 +2,9 @@
 
 GB::GB()
 {
-
 }
 
-void GB::LoadCart(char * file_name)
+void GB::LoadCart(std::string filename)
 {
-        
+        cart.LoadRom(filename);
 }
