@@ -9,6 +9,7 @@ class GB
 public:
         GB();
         void LoadCart(std::string file_name);
+        void LoadBootRom(std::string file_name);
 
         enum mem_bus_pointers
         {
@@ -37,4 +38,7 @@ private:
         std::array<uint8_t, 20> oam{};
         std::array<uint8_t, 16> hram{};
         uint8_t ie{0};
+
+        //boot rom
+        std::array<uint8_t, 256> boot_rom{};
 };
