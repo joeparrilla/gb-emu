@@ -1,7 +1,11 @@
 #include "gb.h"
+#include "cart.h"
+#include "memory.h"
 #include <iostream>
 #include <fstream>
 #include <bitset>
+
+using namespace Cart;
 
 GB::GB()
 {
@@ -9,7 +13,7 @@ GB::GB()
 
 void GB::LoadCart(std::string filename)
 {
-        cart.LoadRom(filename);
+        Cart::LoadRom(filename);
 }
 
 void GB::LoadBootRom(std::string filename)
@@ -30,4 +34,9 @@ void GB::LoadBootRom(std::string filename)
                 }
                 delete[] buffer;
         }
+}
+
+void GB::DumpCartHeaderToConsole()
+{
+        Cart::DumpHeaderToConsole();
 }

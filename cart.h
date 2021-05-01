@@ -4,29 +4,23 @@
 #include <array>
 #include <string>
 
-class Cart
+namespace Cart
 {
-public:
-        Cart();
-        void LoadRom(std::string filename);
-        void DumpHeaderToConsole();
-
-        std::array<uint8_t, 48> logo{};
-        std::array<uint8_t, 16> title{};
-        std::array<uint8_t, 4> mfct_code{};
-        uint8_t cgb_flag{};
-        std::array<uint8_t, 2> new_lics_code{};
-        uint8_t sgb_flag{};
-        uint8_t cart_type{};
-        uint8_t rom_size{};
-        uint8_t ram_size{};
-        uint8_t dest_code{};
-        uint8_t old_lics_code{};
-        uint8_t mask_rom_version{};
-        uint8_t header_checksum{};
-        std::array<uint8_t, 4> global_checksum{};
-
-        std::array<uint8_t, 32768> rom{};
+        extern std::array<uint8_t, 48> logo;
+        extern std::array<uint8_t, 16> title;
+        extern std::array<uint8_t, 4> mfct_code;
+        extern uint8_t cgb_flag;
+        extern std::array<uint8_t, 2> new_lics_code;
+        extern uint8_t sgb_flag;
+        extern uint8_t cart_type;
+        extern uint8_t rom_size;
+        extern uint8_t ram_size;
+        extern uint8_t dest_code;
+        extern uint8_t old_lics_code;
+        extern uint8_t mask_rom_version;
+        extern uint8_t header_checksum;
+        extern std::array<uint8_t, 4> global_checksum;
+        extern std::array<uint8_t, 32768> rom;
 
         enum cart_header_pointers
         {
@@ -47,6 +41,8 @@ public:
                 GLOBAL_CHECKSUM_START = 0x014E
         };
 
-private:
-
+        void LoadRom(std::string filename);
+        void DumpHeaderToConsole();
+        void Write(uint8_t address, uint8_t data);
+        uint8_t Read(uint8_t address);
 };
