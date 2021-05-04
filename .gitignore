@@ -11,6 +11,7 @@
 *.obj
 build/
 roms/
+bgb/
 
 # Precompiled Headers
 *.gch

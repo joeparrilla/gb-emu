@@ -8,28 +8,31 @@ namespace RAM
 
         void WriteWRam(uint8_t address, uint8_t data)
         {
+                wram[address] = data;
         }
 
         uint8_t ReadWRam(uint8_t address)
         {
-                return 0;
+                return wram[address];
         }
 
         void WriteHRam(uint8_t address, uint8_t data)
         {
+                hram[address] = data;
         }
 
         uint8_t ReadHRam(uint8_t address)
         {
-                return 0;
+                return hram[address];
         }
 
         void WriteERam(uint8_t address, uint8_t data)
         {
+                eram[address] = data;
         }
 
         uint8_t ReadERam(uint8_t address)
         {
-                return 0;
+                return eram[address];
         }
 }

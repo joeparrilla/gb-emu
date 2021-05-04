@@ -6,14 +6,25 @@
 
 namespace CPU
 {
-        extern uint8_t reg_a;
-        extern uint8_t reg_f;
-        extern uint8_t reg_b;
-        extern uint8_t reg_c;
-        extern uint8_t reg_d;
-        extern uint8_t reg_e;
-        extern uint8_t reg_h;
-        extern uint8_t reg_l;
-        extern uint8_t sp;
-        extern uint8_t pc;
+        uint8_t NextByte();
+        void Cycle();
+
+        union Register
+        {
+                struct
+                {
+                        uint8_t lo;
+                        uint8_t hi;
+                };
+                uint16_t value;
+        };
+
+        extern Register reg_af;
+        extern Register reg_bc;
+        extern Register reg_de;
+        extern Register reg_hl;
+        extern uint16_t sp;
+        extern uint16_t pc;
+
+        extern uint8_t opcode;
 }

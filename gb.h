@@ -4,21 +4,23 @@
 #include <array>
 #include <string>
 
-class GB
+namespace GB
 {
-public:
-        GB();
         void LoadCart(std::string file_name);
         void LoadBootRom(std::string file_name);
         void DumpCartHeaderToConsole();
+        void DumpBootRomToConsole();
+        void DumpCPURegToConsole();
 
         //ram, registers, etc on chip
-        std::array<uint8_t, 8192> vram{};
-        std::array<uint8_t, 16> io_regs{};
-        std::array<uint8_t, 20> oam{};
-        uint8_t ie{0};
+        extern std::array<uint8_t, 8192> vram;
+        extern std::array<uint8_t, 128> io_regs;
+        extern std::array<uint8_t, 160> oam;
+        extern uint8_t ie;
 
-private:
         //boot rom
-        std::array<uint8_t, 256> boot_rom{};
+        extern std::array<uint8_t, 256> boot_rom;
+        extern bool boot_rom_enabled;
+
+        extern bool running;
 };

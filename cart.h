@@ -19,7 +19,7 @@ namespace Cart
         extern uint8_t old_lics_code;
         extern uint8_t mask_rom_version;
         extern uint8_t header_checksum;
-        extern std::array<uint8_t, 4> global_checksum;
+        extern std::array<uint8_t, 2> global_checksum;
         extern std::array<uint8_t, 32768> rom;
 
         enum cart_header_pointers

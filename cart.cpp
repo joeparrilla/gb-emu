@@ -1,11 +1,9 @@
 #include "cart.h"
 #include <iostream>
 #include <fstream>
-#include <bitset>
 
 namespace Cart
 {
-
         std::array<uint8_t, 48> logo{0};
         std::array<uint8_t, 16> title{0};
         std::array<uint8_t, 4> mfct_code{0};
@@ -19,7 +17,7 @@ namespace Cart
         uint8_t old_lics_code{0};
         uint8_t mask_rom_version{0};
         uint8_t header_checksum{0};
-        std::array<uint8_t, 4> global_checksum{0};
+        std::array<uint8_t, 2> global_checksum{0};
         std::array<uint8_t, 32768> rom{0};
 
         void LoadRom(std::string filename)
@@ -101,115 +99,93 @@ namespace Cart
 
         void DumpHeaderToConsole()
         {
-                std::bitset<8> converted;
-
                 std::cout << "Nintendo Logo: ";
-                for (int i{0}; auto &item : logo)
+                for (auto &item : logo)
                 {
-                        std::bitset<8> converted(item);
-                        std::cout << std::hex << converted.to_ulong() << " ";
-                        ++i;
+                        std::cout << std::hex << int(item) << " ";
                 }
                 std::cout << "\n";
 
                 std::cout << "Title: ";
-                for (int i{0}; auto &item : title)
+                for (auto &item : title)
                 {
-                        std::bitset<8> converted(item);
-                        std::cout << std::hex << converted.to_ulong() << " ";
-                        ++i;
+                        std::cout << std::hex << int(item) << " ";
                 }
                 std::cout << "\n";
 
                 std::cout << "Manufacturer Code: ";
-                for (int i{0}; auto &item : mfct_code)
+                for (auto &item : mfct_code)
                 {
-                        std::bitset<8> converted(item);
-                        std::cout << std::hex << converted.to_ulong() << " ";
-                        ++i;
+                        std::cout << std::hex << int(item) << " ";
                 }
                 std::cout << "\n";
 
-                //cgb flag
                 std::cout << "CGB Flag: ";
-                converted = cgb_flag;
-                std::cout << std::hex << converted.to_ulong() << " ";
+                std::cout << std::hex << int(cgb_flag) << " ";
                 std::cout << "\n";
 
                 std::cout << "New Licensee Code: ";
-                for (int i{0}; auto &item : new_lics_code)
+                for (auto &item : new_lics_code)
                 {
-                        std::bitset<8> converted(item);
-                        std::cout << std::hex << converted.to_ulong() << " ";
-                        ++i;
+                        std::cout << std::hex << int(item) << " ";
                 }
                 std::cout << "\n";
 
-                //sgb flag
                 std::cout << "SGB Flag: ";
-                converted = sgb_flag;
-                std::cout << std::hex << converted.to_ulong() << " ";
+                std::cout << std::hex << int(sgb_flag) << " ";
                 std::cout << "\n";
 
                 // cart type
                 std::cout << "Cart Type: ";
-                converted = cart_type;
-                std::cout << std::hex << converted.to_ulong() << " ";
+                std::cout << std::hex << int(cart_type) << " ";
                 std::cout << "\n";
 
                 // rom size
                 std::cout << "Rom Size: ";
-                converted = rom_size;
-                std::cout << std::hex << converted.to_ulong() << " ";
+                std::cout << std::hex << int(rom_size) << " ";
                 std::cout << "\n";
 
                 // ram size
                 std::cout << "Ram Size: ";
-                converted = ram_size;
-                std::cout << std::hex << converted.to_ulong() << " ";
+                std::cout << std::hex << int(ram_size) << " ";
                 std::cout << "\n";
 
                 // dest code
                 std::cout << "Destination Code: ";
-                converted = dest_code;
-                std::cout << std::hex << converted.to_ulong() << " ";
+                std::cout << std::hex << int(dest_code) << " ";
                 std::cout << "\n";
 
                 // Old lics code
                 std::cout << "Old Licensee Code: ";
-                converted = old_lics_code;
-                std::cout << std::hex << converted.to_ulong() << " ";
+                std::cout << std::hex << int(old_lics_code) << " ";
                 std::cout << "\n";
 
                 // mask rom
                 std::cout << "Mask ROM Version: ";
-                converted = mask_rom_version;
-                std::cout << std::hex << converted.to_ulong() << " ";
+                std::cout << std::hex << int(mask_rom_version) << " ";
                 std::cout << "\n";
 
                 // header check
                 std::cout << "Header Checksum: ";
-                converted = header_checksum;
-                std::cout << std::hex << converted.to_ulong() << " ";
+                std::cout << std::hex << int(header_checksum) << " ";
                 std::cout << "\n";
 
                 std::cout << "Global Checksum: ";
-                for (int i{0}; auto &item : global_checksum)
+                for (auto &item : global_checksum)
                 {
-                        std::bitset<8> converted(item);
-                        std::cout << std::hex << converted.to_ulong() << " ";
-                        ++i;
+                        std::cout << std::hex << int(item) << " ";
                 }
                 std::cout << "\n";
         }
 
         void Write(uint8_t address, uint8_t data)
         {
+                rom[address] = data;
         }
 
         uint8_t Read(uint8_t address)
         {
-                return 0;
+                return rom[address];
         }
 
 }
