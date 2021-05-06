@@ -7,7 +7,7 @@ namespace Memory
 {
         uint8_t Read(uint16_t address)
         {
-
+                //TODO tick clock here
                 if (GB::boot_rom_enabled && address < Cart::ENTRY_START)
                 {
                         return GB::boot_rom[address];
@@ -58,11 +58,12 @@ namespace Memory
                 }
                 else
                 {
-                        //INVALID ADDR
+                        //INVALID ADDRESS
                 }
         }
         void Write(uint16_t address, uint8_t data)
         {
+                //TODO tick clock here
                 if (address >= BUS_POINTERS::CART_ROM0_START && address <= BUS_POINTERS::CART_ROM0_END)
                 {
                         Cart::Write(address, data);
