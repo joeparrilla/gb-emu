@@ -178,12 +178,12 @@ namespace Cart
                 std::cout << "\n";
         }
 
-        void Write(uint8_t address, uint8_t data)
+        void Write(uint16_t address, uint8_t data)
         {
                 rom[address] = data;
         }
 
-        uint8_t Read(uint8_t address)
+        uint8_t Read(uint16_t address)
         {
                 return rom[address];
         }

@@ -8,6 +8,18 @@ namespace CPU
 {
         uint8_t NextByte();
         void Cycle();
+        void SetZFlag(int a);
+        void setNFlag(int a);
+        void SetHFlag(int a);
+        void SetCFlag(int a);
+        uint8_t GetZFlag();
+        uint8_t GetNFlag();
+        uint8_t GetHFlag();
+        uint8_t GetCFlag();
+        bool CheckAddCarry(uint8_t a, uint8_t b);
+        bool CheckSubCarry(uint8_t a, uint8_t b);
+        bool CheckAddHalfCarry(uint8_t a, uint8_t b);
+        bool CheckSubHalfCarry(uint8_t a, uint8_t b);
 
         union Register
         {
