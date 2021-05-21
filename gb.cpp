@@ -12,6 +12,7 @@ namespace GB
         std::array<uint8_t, 128> io_regs{0};
         std::array<uint8_t, 160> oam{0};
         uint8_t ie{0};
+        bool ime{0};
 
         //boot rom
         std::array<uint8_t, 256> boot_rom{0};

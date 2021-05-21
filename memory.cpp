@@ -99,6 +99,12 @@ namespace Memory
                 else if (address >= BUS_POINTERS::IO_START && address <= BUS_POINTERS::IO_END)
                 {
                         GB::io_regs[address - BUS_POINTERS::IO_START] = data;
+
+                        //Disable boot rom if set to non zero
+                        if (address == 0xFF50 && data != 0)
+                        {
+                                GB::boot_rom_enabled = false;
+                        }
                 }
                 else if (address >= BUS_POINTERS::HRAM_START && address <= BUS_POINTERS::HRAM_END)
                 {

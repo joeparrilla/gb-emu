@@ -20,6 +20,9 @@ namespace CPU
         bool CheckSubCarry(uint8_t a, uint8_t b);
         bool CheckAddHalfCarry(uint8_t a, uint8_t b);
         bool CheckSubHalfCarry(uint8_t a, uint8_t b);
+        bool CheckAdd16Carry(uint16_t a, uint16_t b);
+        bool CheckAdd16HalfCarry(uint16_t a, uint16_t b);
+        bool CheckSub16HalfCarry(uint16_t a, uint16_t b);
 
         union Register
         {

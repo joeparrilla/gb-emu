@@ -12,8 +12,9 @@ int main(int argc, char **argv)
 
         while (GB::running)
         {
-                CPU::Cycle();
                 GB::DumpCPURegToConsole();
+                CPU::Cycle();
+                
         }
 
         // GB::DumpCPURegToConsole();
