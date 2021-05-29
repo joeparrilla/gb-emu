@@ -23,6 +23,7 @@ namespace GB
         void LoadCart(std::string filename)
         {
                 Cart::LoadRom(filename);
+                Memory::Write(0xFF44, 0x90); //TODO hard coded to get through boot rom without display
         }
 
         void LoadBootRom(std::string filename)
@@ -71,6 +72,18 @@ namespace GB
                 std::cout << "HL: " << std::hex << int(CPU::reg_hl.value) << "\n";
                 std::cout << "SP: " << std::hex << int(CPU::sp) << "\n";
                 std::cout << "PC: " << std::hex << int(CPU::pc) << "\n";
+        }
+
+        void DumpVRamToConsole()
+        {
+                std::cout << "VRAM: ";
+                for (ulong i = 0; i < vram.size(); i += 2)
+                {
+                        std::cout << "0x" << Memory::VRAM_START + i << ": ";
+                        std::cout << std::hex << ((int(vram[i]) + (int(vram[i+1]) << 8u))) << " ";
+                        std::cout << "\n";
+                }
+                
         }
 
 }

@@ -12,7 +12,12 @@ int main(int argc, char **argv)
 
         while (GB::running)
         {
-                GB::DumpCPURegToConsole();
+                // GB::DumpCPURegToConsole();
+                if (!GB::boot_rom_enabled)
+                {
+                        GB::DumpVRamToConsole();
+                        break;
+                }
                 CPU::Cycle();
                 
         }

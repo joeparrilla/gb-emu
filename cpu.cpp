@@ -1829,7 +1829,6 @@ namespace CPU
                 //------------control ops---------
                 case 0x20: //JR NZ,i8
                 {
-                        Memory::Write(0xFF44, 0x90);
                         int8_t i8 = (int8_t)NextByte();
                         if (!GetZFlag())
                         {
@@ -2031,6 +2030,13 @@ namespace CPU
                         Memory::Write(--sp, pc >> 8u);
                         Memory::Write(--sp, pc & 0xFFu);
                         pc = addr16;
+                        break;
+
+                case 0xF3: //DI
+                        GB::ime = false;
+                        break;
+                case 0xFB: //EI
+                        GB::ime = true;
                         break;
 
                         //------------END control ops---------
