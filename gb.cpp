@@ -9,10 +9,20 @@ namespace GB
 {
         //ram, registers, etc on chip
         std::array<uint8_t, 8192> vram{0};
-        std::array<uint8_t, 128> io_regs{0};
         std::array<uint8_t, 160> oam{0};
+        std::array<uint8_t, 128> io_regs{0};
         uint8_t ie{0};
+
+        //I/O
+        uint16_t div{0};
+        uint16_t tima{0};
+        uint8_t tma{0};
+        uint8_t tac{0};
         bool ime{0};
+        uint8_t intf{0};
+
+        //Input buttons
+        std::array<uint8_t, 1> buttons{};
 
         //boot rom
         std::array<uint8_t, 256> boot_rom{0};
@@ -80,10 +90,9 @@ namespace GB
                 for (ulong i = 0; i < vram.size(); i += 2)
                 {
                         std::cout << "0x" << Memory::VRAM_START + i << ": ";
-                        std::cout << std::hex << ((int(vram[i]) + (int(vram[i+1]) << 8u))) << " ";
+                        std::cout << std::hex << ((int(vram[i]) + (int(vram[i + 1]) << 8u))) << " ";
                         std::cout << "\n";
                 }
-                
         }
 
 }

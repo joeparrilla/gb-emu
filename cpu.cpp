@@ -21,11 +21,6 @@ namespace CPU
                 return byte;
         }
 
-        void Tick()
-        {
-                
-        }
-
         void Cycle()
         {
                 opcode = NextByte();
@@ -36,6 +31,9 @@ namespace CPU
                 switch (opcode)
                 {
                 case 0x00: //NOP
+                        break;
+                case 0x10: //STOP
+                        GB::div = 0;
                         break;
                         //--------------8 bit loads-----------------
                 case 0x02: //LD (BC),A

@@ -46,6 +46,27 @@ namespace Memory
                 }
                 else if (address >= BUS_POINTERS::IO_START && address <= BUS_POINTERS::IO_END)
                 {
+                        switch (address)
+                        {
+                        case 0xFF04:
+                                return GB::div;
+                                break;
+                        case 0xFF05:
+                                return GB::tima;
+                                break;
+                        case 0xFF06:
+                                return GB::tma;
+                                break;
+                        case 0xFF07:
+                                return GB::tac;
+                                break;
+                        case 0xFF0F:
+                                return GB::intf;
+                                break;
+                        default:
+                                break;
+                        }
+
                         return GB::io_regs[address - BUS_POINTERS::IO_START];
                 }
                 else if (address >= BUS_POINTERS::HRAM_START && address <= BUS_POINTERS::HRAM_END)
@@ -98,13 +119,34 @@ namespace Memory
                 }
                 else if (address >= BUS_POINTERS::IO_START && address <= BUS_POINTERS::IO_END)
                 {
-                        GB::io_regs[address - BUS_POINTERS::IO_START] = data;
-
-                        //Disable boot rom if set to non zero
-                        if (address == 0xFF50 && data != 0)
+                        switch (address)
                         {
-                                GB::boot_rom_enabled = false;
+                        case 0xFF50: //Disable boot rom if set to non zero
+                                if (data != 0)
+                                {
+                                        GB::boot_rom_enabled = false;
+                                }
+                                break;
+                        case 0xFF04:
+                                GB::div = 0;
+                                break;
+                        case 0xFF05:
+                                GB::tima = data;
+                                break;
+                        case 0xFF06:
+                                GB::tma = data;
+                                break;
+                        case 0xFF07:
+                                GB::tac = data;
+                                break;
+                        case 0xFF0F:
+                                GB::intf = data;
+                                break;
+                        default:
+                                break;
                         }
+
+                        GB::io_regs[address - BUS_POINTERS::IO_START] = data;
                 }
                 else if (address >= BUS_POINTERS::HRAM_START && address <= BUS_POINTERS::HRAM_END)
                 {

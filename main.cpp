@@ -1,25 +1,56 @@
 #include "gb.h"
 #include "cpu.h"
+#include "platform.h"
 #include <iostream>
 #include <chrono>
 
+const int VIDEO_WIDTH = 160;
+const int VIDEO_HEIGHT = 144;
+
 int main(int argc, char **argv)
 {
-        GB::LoadCart("roms/tetris.gb");
+
+        if (argc != 4)
+        {
+                std::cerr << "Usage: " << argv[0] << " <Scale> <Delay> <ROM>\n";
+                std::exit(EXIT_FAILURE);
+        }
+
+        int video_scale = std::stoi(argv[1]);
+        int cycle_delay = std::stoi(argv[2]);
+        char const *rom_file_name = argv[3];
+
+        Platform platform("BameGoy", VIDEO_WIDTH * video_scale, VIDEO_HEIGHT * video_scale, VIDEO_WIDTH, VIDEO_HEIGHT);
+        // int video_pitch = sizeof(chip8.display[0]) * VIDEO_WIDTH;
+        int video_pitch = 1 * VIDEO_WIDTH;
+
+        GB::LoadCart(rom_file_name);
         GB::LoadBootRom("roms/dmg_boot.bin");
         // GB::DumpCartHeaderToConsole();
         // GB::DumpBootRomToConsole();
 
-        while (GB::running)
+        auto lastCycleTime = std::chrono::high_resolution_clock::now();
+        bool quit = false;
+
+        while (GB::running && !quit)
         {
-                // GB::DumpCPURegToConsole();
-                if (!GB::boot_rom_enabled)
-                {
-                        GB::DumpVRamToConsole();
-                        break;
-                }
-                CPU::Cycle();
-                
+                quit = platform.ProcessInput(GB::buttons.data());
+
+                auto currentTime = std::chrono::high_resolution_clock::now();
+                float dt = std::chrono::duration<float, std::chrono::milliseconds::period>(currentTime - lastCycleTime).count();
+
+                // if (dt > cycle_delay)
+                // {
+                        lastCycleTime = currentTime;
+                        GB::DumpCPURegToConsole();
+                        // if (!GB::boot_rom_enabled)
+                        // {
+                        //         GB::DumpVRamToConsole();
+                        //         break;
+                        // }
+                        CPU::Cycle();
+                        platform.Update(GB::vram.data(), video_pitch);
+                // }
         }
 
         // GB::DumpCPURegToConsole();

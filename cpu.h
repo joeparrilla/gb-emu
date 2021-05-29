@@ -7,7 +7,6 @@
 namespace CPU
 {
         uint8_t NextByte();
-        void Tick();
         void Cycle();
         void SetZFlag(int a);
         void setNFlag(int a);
