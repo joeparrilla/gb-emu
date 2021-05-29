@@ -21,6 +21,11 @@ namespace CPU
                 return byte;
         }
 
+        void Tick()
+        {
+                
+        }
+
         void Cycle()
         {
                 opcode = NextByte();
