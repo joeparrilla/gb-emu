@@ -12,6 +12,7 @@ namespace GB
         void DumpBootRomToConsole();
         void DumpCPURegToConsole();
         void DumpVRamToConsole();
+        void DumpBackgroundToConsole();
 
         //ram, registers, etc on chip
         extern std::array<uint8_t, 8192> vram;

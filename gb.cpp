@@ -2,6 +2,7 @@
 #include "cart.h"
 #include "memory.h"
 #include "cpu.h"
+#include "display.h"
 #include <iostream>
 #include <fstream>
 
@@ -94,5 +95,4 @@ namespace GB
                         std::cout << "\n";
                 }
         }
-
 }

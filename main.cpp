@@ -1,6 +1,7 @@
 #include "gb.h"
 #include "cpu.h"
 #include "platform.h"
+#include "display.h"
 #include <iostream>
 #include <chrono>
 
@@ -21,8 +22,8 @@ int main(int argc, char **argv)
         char const *rom_file_name = argv[3];
 
         Platform platform("BameGoy", VIDEO_WIDTH * video_scale, VIDEO_HEIGHT * video_scale, VIDEO_WIDTH, VIDEO_HEIGHT);
-        // int video_pitch = sizeof(chip8.display[0]) * VIDEO_WIDTH;
-        int video_pitch = 1 * VIDEO_WIDTH;
+        // int video_pitch = sizeof(Display::bg[0]) * VIDEO_WIDTH;
+        int video_pitch = sizeof(Display::bg[0]);
 
         GB::LoadCart(rom_file_name);
         GB::LoadBootRom("roms/dmg_boot.bin");
@@ -41,15 +42,19 @@ int main(int argc, char **argv)
 
                 // if (dt > cycle_delay)
                 // {
-                        lastCycleTime = currentTime;
-                        GB::DumpCPURegToConsole();
-                        // if (!GB::boot_rom_enabled)
-                        // {
-                        //         GB::DumpVRamToConsole();
-                        //         break;
-                        // }
-                        CPU::Cycle();
-                        platform.Update(GB::vram.data(), video_pitch);
+                lastCycleTime = currentTime;
+                GB::DumpCPURegToConsole();
+                // if (!GB::boot_rom_enabled)
+                // {
+                //         GB::DumpVRamToConsole();
+                //         break;
+                // }
+                CPU::Cycle();
+                // Display::UpdateBGMap1();
+                // Display::BuildTiles();
+                // Display::UpdateBG();
+                // GB::DumpBackgroundToConsole();
+                platform.Update(Display::bg.data(), video_pitch);
                 // }
         }
 

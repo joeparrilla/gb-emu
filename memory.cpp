@@ -2,6 +2,7 @@
 #include "gb.h"
 #include "cart.h"
 #include "ram.h"
+#include "display.h"
 
 namespace Memory
 {
@@ -62,6 +63,12 @@ namespace Memory
                                 break;
                         case 0xFF0F:
                                 return GB::intf;
+                                break;
+                        case 0xFF40:
+                                return Display::lcdc.value;
+                                break;
+                        case 0xFF41:
+                                return Display::stat.value;
                                 break;
                         default:
                                 break;
@@ -141,6 +148,12 @@ namespace Memory
                                 break;
                         case 0xFF0F:
                                 GB::intf = data;
+                                break;
+                        case 0xFF40:
+                                Display::lcdc.value = data;
+                                break;
+                        case 0xFF41:
+                                Display::stat.value = data;
                                 break;
                         default:
                                 break;

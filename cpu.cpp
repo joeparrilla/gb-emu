@@ -1,6 +1,7 @@
 #include "cpu.h"
 #include "memory.h"
 #include "gb.h"
+#include "display.h"
 #include <iostream>
 
 namespace CPU
@@ -27,6 +28,13 @@ namespace CPU
                 uint16_t addr16(0);
                 uint16_t data16(0);
                 uint8_t data8(0);
+
+                // if (pc == 0x56)
+                // {
+                //         Display::UpdateBGMap1();
+                //         Display::BuildTiles();
+                //         Display::UpdateBG();
+                // }
 
                 switch (opcode)
                 {
